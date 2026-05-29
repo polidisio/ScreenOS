@@ -35,8 +35,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem.button {
-            button.title = "SO"
-            button.image = NSImage(systemSymbolName: "rectangle.split.3x1", accessibilityDescription: "ScreenOS")
+            button.title = ""
+            // Load custom PNG icon
+            let iconPath = "/Users/clot/Projects/ScreenOS/Resources/AppIcon.png"
+            if let iconImage = NSImage(contentsOfFile: iconPath) {
+                button.image = iconImage
+            } else {
+                button.title = "SO"
+                button.image = NSImage(systemSymbolName: "rectangle.split.3x1", accessibilityDescription: "ScreenOS")
+            }
             button.imagePosition = .imageLeft
             button.action = #selector(menuBarClicked)
             button.target = self
