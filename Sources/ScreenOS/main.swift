@@ -6,7 +6,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // Don't use LSUIElement - instead hide from Dock manually
         NSApp.setActivationPolicy(.accessory)
+
         setupMenuBar()
 
         // Request accessibility permission
