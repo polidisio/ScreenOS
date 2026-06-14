@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleDevelopmentRegion</key>
-    <string>es</string>
+    <string>en</string>
     <key>CFBundleDisplayName</key>
     <string>ScreenOS</string>
     <key>CFBundleExecutable</key>
@@ -20,13 +20,21 @@
     <string>1.0.0</string>
     <key>CFBundleVersion</key>
     <string>1</string>
+    <key>LSApplicationCategoryType</key>
+    <string>public.app-category.productivity</string>
     <key>LSUIElement</key>
     <true/>
     <key>NSHighResolutionCapable</key>
     <true/>
     <key>NSHumanReadableCopyright</key>
-    <string>© 2025 — ScreenOS</string>
+    <string>© 2025 ScreenOS</string>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
+    <!-- Required for Accessibility API (AXUIElement window control) -->
+    <key>NSAccessibilityUsageDescription</key>
+    <string>ScreenOS needs Accessibility permission to move and resize windows in other applications.</string>
+    <!-- Required for window thumbnails in the Window Switcher -->
+    <key>NSScreenCaptureUsageDescription</key>
+    <string>ScreenOS uses Screen Recording to display window previews in the Window Switcher.</string>
 </dict>
 </plist>
