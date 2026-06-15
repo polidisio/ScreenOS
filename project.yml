@@ -19,14 +19,29 @@ settings:
     GENERATE_INFOPLIST_FILE: NO
 
 targets:
+  ScreenOSKit:
+    type: framework
+    platform: macOS
+    sources:
+      - path: Sources/ScreenOSKit
+    settings:
+      base:
+        PRODUCT_NAME: ScreenOSKit
+        MACOSX_DEPLOYMENT_TARGET: "14.0"
+        SWIFT_VERSION: 5.9
+        DEFINES_MODULE: YES
+        INSTALL_PATH: "@rpath"
+        SKIP_INSTALL: YES
+
   ScreenOS:
     type: application
     platform: macOS
     sources:
-      - path: Sources
-        type: group
-      - path: Resources
-        type: folder
+      - path: Sources/ScreenOS/main.swift
+      - path: Sources/ScreenOS/Resources
+    dependencies:
+      - target: ScreenOSKit
+        embed: true
     settings:
       base:
         LD_RUNPATH_SEARCH_PATHS: "@executable_path/../Frameworks"
@@ -37,5 +52,16 @@ targets:
         MACOSX_DEPLOYMENT_TARGET: "14.0"
         ENABLE_APP_SANDBOX: NO
         ENABLE_HARDENED_RUNTIME: NO
-    entitlements:
-      path: Resources/ScreenOS.entitlements
+
+  ScreenOSTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests/ScreenOSTests
+    dependencies:
+      - target: ScreenOSKit
+    settings:
+      base:
+        PRODUCT_NAME: ScreenOSTests
+        MACOSX_DEPLOYMENT_TARGET: "14.0"
+        SWIFT_VERSION: 5.9

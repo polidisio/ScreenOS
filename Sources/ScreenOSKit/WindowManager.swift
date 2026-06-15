@@ -95,12 +95,11 @@ public final class WindowManager {
             let posResult = AXUIElementCopyAttributeValue(axWin, kAXPositionAttribute as CFString, &positionValue)
             let sizeResult = AXUIElementCopyAttributeValue(axWin, kAXSizeAttribute as CFString, &sizeValue)
 
-            if posResult == .success, let pos = positionValue as? AXValue,
-               sizeResult == .success, let size = sizeValue as? AXValue {
+            if posResult == .success, sizeResult == .success {
                 var point = CGPoint.zero
                 var sizeRect = CGSize.zero
-                if AXValueGetValue(pos, .cgPoint, &point),
-                   AXValueGetValue(size, .cgSize, &sizeRect) {
+                if AXValueGetValue(positionValue! as! AXValue, .cgPoint, &point),
+                   AXValueGetValue(sizeValue! as! AXValue, .cgSize, &sizeRect) {
                     let currentFrame = CGRect(origin: point, size: sizeRect)
                     if abs(currentFrame.origin.x - window.frame.origin.x) < 5 {
                         return setAXWindowFrame(frame, for: axWin)
