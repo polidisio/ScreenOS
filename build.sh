@@ -6,7 +6,6 @@ APP_NAME="ScreenOS"
 BUILD_DIR="$PROJECT_DIR/.build"
 RELEASE_DIR="$BUILD_DIR/release"
 APP_BUNDLE="$RELEASE_DIR/$APP_NAME.app"
-BINARY="$BUILD_DIR/$(swift build -c release --show-bin-path 2>/dev/null || echo "$BUILD_DIR/release")/$APP_NAME"
 
 echo "🔨 Building $APP_NAME..."
 
@@ -15,11 +14,10 @@ cd "$PROJECT_DIR"
 # Build with SwiftPM
 swift build -c release
 
-# Determine actual binary path
-BINARY_SRC="$BUILD_DIR/release/$APP_NAME"
+BINARY_SRC="$RELEASE_DIR/$APP_NAME"
 if [ ! -f "$BINARY_SRC" ]; then
     echo "❌ Binary not found at $BINARY_SRC"
-    ls "$BUILD_DIR/release/" 2>/dev/null || echo "  (release dir missing)"
+    ls "$RELEASE_DIR/" 2>/dev/null || echo "  (release dir missing)"
     exit 1
 fi
 
@@ -30,14 +28,29 @@ echo "📦 Creating $APP_NAME.app bundle..."
 rm -rf "$APP_BUNDLE"
 mkdir -p "$APP_BUNDLE/Contents/MacOS"
 mkdir -p "$APP_BUNDLE/Contents/Resources"
+mkdir -p "$APP_BUNDLE/Contents/Frameworks"
 
+# Copy executable
 cp "$BINARY_SRC" "$APP_BUNDLE/Contents/MacOS/$APP_NAME"
-cp "$PROJECT_DIR/Resources/Info.plist" "$APP_BUNDLE/Contents/"
-
-# Make executable
 chmod +x "$APP_BUNDLE/Contents/MacOS/$APP_NAME"
 
-# Codesign with ad-hoc signature (required for Accessibility API on macOS 14+)
+# Copy Info.plist
+cp "$PROJECT_DIR/Resources/Info.plist" "$APP_BUNDLE/Contents/"
+
+# Copy asset catalog (AppIcon)
+if [ -d "$PROJECT_DIR/Sources/ScreenOS/Resources/Assets.xcassets" ]; then
+    cp -r "$PROJECT_DIR/Sources/ScreenOS/Resources/Assets.xcassets" "$APP_BUNDLE/Contents/Resources/"
+fi
+
+# Copy ScreenOSKit.framework if it exists
+if [ -d "$RELEASE_DIR/ScreenOSKit.framework" ]; then
+    cp -r "$RELEASE_DIR/ScreenOSKit.framework" "$APP_BUNDLE/Contents/Frameworks/"
+elif [ -d "$RELEASE_DIR/ScreenOSKit.swiftmodule" ]; then
+    echo "⚠️  ScreenOSKit.framework not found - checking for alternative..."
+    ls "$RELEASE_DIR/" 2>/dev/null
+fi
+
+# Codesign with ad-hoc signature
 codesign --force --deep --sign - "$APP_BUNDLE" 2>/dev/null || true
 
 echo ""

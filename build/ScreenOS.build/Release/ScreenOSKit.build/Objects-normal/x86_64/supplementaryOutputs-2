@@ -1,0 +1,12 @@
+{
+  "/Users/clot/Projects/ScreenOS/Sources/ScreenOSKit/HotkeyManager.swift" : {
+    "abi-baseline-json" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit.abi.json",
+    "const-values" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit-primary.swiftconstvalues",
+    "dependencies" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit-primary.d",
+    "diagnostics" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit-primary.dia",
+    "objc-header" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit-Swift.h",
+    "swiftdoc" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit.swiftdoc",
+    "swiftmodule" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit.swiftmodule",
+    "swiftsourceinfo" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit.swiftsourceinfo"
+  }
+}

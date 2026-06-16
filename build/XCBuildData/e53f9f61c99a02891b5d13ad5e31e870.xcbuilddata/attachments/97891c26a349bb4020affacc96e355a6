@@ -1,0 +1,66 @@
+{
+  "" : {
+    "const-values" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit-primary.swiftconstvalues",
+    "dependencies" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit-primary.d",
+    "diagnostics" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit-primary.dia",
+    "emit-module-dependencies" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit-primary-emit-module.dia",
+    "pch" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenOSKit-primary.swiftdeps"
+  },
+  "/Users/clot/Projects/ScreenOS/Sources/ScreenOSKit/HotkeyManager.swift" : {
+    "index-unit-output-path" : "/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/HotkeyManager.o",
+    "llvm-bc" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/HotkeyManager.bc",
+    "object" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/HotkeyManager.o"
+  },
+  "/Users/clot/Projects/ScreenOS/Sources/ScreenOSKit/Models/ScreenWindow.swift" : {
+    "index-unit-output-path" : "/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenWindow.o",
+    "llvm-bc" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenWindow.bc",
+    "object" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ScreenWindow.o"
+  },
+  "/Users/clot/Projects/ScreenOS/Sources/ScreenOSKit/PermissionsManager.swift" : {
+    "index-unit-output-path" : "/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/PermissionsManager.o",
+    "llvm-bc" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/PermissionsManager.bc",
+    "object" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/PermissionsManager.o"
+  },
+  "/Users/clot/Projects/ScreenOS/Sources/ScreenOSKit/Preferences/PreferencesViewController.swift" : {
+    "index-unit-output-path" : "/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/PreferencesViewController.o",
+    "llvm-bc" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/PreferencesViewController.bc",
+    "object" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/PreferencesViewController.o"
+  },
+  "/Users/clot/Projects/ScreenOS/Sources/ScreenOSKit/Preferences/ShortcutRecorder.swift" : {
+    "index-unit-output-path" : "/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ShortcutRecorder.o",
+    "llvm-bc" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ShortcutRecorder.bc",
+    "object" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ShortcutRecorder.o"
+  },
+  "/Users/clot/Projects/ScreenOS/Sources/ScreenOSKit/ShowDesktopManager.swift" : {
+    "index-unit-output-path" : "/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ShowDesktopManager.o",
+    "llvm-bc" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ShowDesktopManager.bc",
+    "object" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/ShowDesktopManager.o"
+  },
+  "/Users/clot/Projects/ScreenOS/Sources/ScreenOSKit/TilingEngine.swift" : {
+    "index-unit-output-path" : "/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/TilingEngine.o",
+    "llvm-bc" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/TilingEngine.bc",
+    "object" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/TilingEngine.o"
+  },
+  "/Users/clot/Projects/ScreenOS/Sources/ScreenOSKit/WindowManager.swift" : {
+    "index-unit-output-path" : "/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/WindowManager.o",
+    "llvm-bc" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/WindowManager.bc",
+    "object" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/WindowManager.o"
+  },
+  "/Users/clot/Projects/ScreenOS/Sources/ScreenOSKit/WindowSwitcher/SwitcherCell.swift" : {
+    "index-unit-output-path" : "/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/SwitcherCell.o",
+    "llvm-bc" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/SwitcherCell.bc",
+    "object" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/SwitcherCell.o"
+  },
+  "/Users/clot/Projects/ScreenOS/Sources/ScreenOSKit/WindowSwitcher/SwitcherController.swift" : {
+    "index-unit-output-path" : "/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/SwitcherController.o",
+    "llvm-bc" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/SwitcherController.bc",
+    "object" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/SwitcherController.o"
+  },
+  "/Users/clot/Projects/ScreenOS/Sources/ScreenOSKit/WindowSwitcher/SwitcherPanel.swift" : {
+    "index-unit-output-path" : "/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/SwitcherPanel.o",
+    "llvm-bc" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/SwitcherPanel.bc",
+    "object" : "/Users/clot/Projects/ScreenOS/build/ScreenOS.build/Release/ScreenOSKit.build/Objects-normal/x86_64/SwitcherPanel.o"
+  }
+}
