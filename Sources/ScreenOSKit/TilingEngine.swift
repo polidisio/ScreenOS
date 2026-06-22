@@ -109,11 +109,22 @@ public final class TilingEngine {
     }
 
     /// Determines which screen a window is on based on its frame.
-    public func screen(for frame: CGRect) -> NSScreen {
+    /// - Parameter quartzFrame: Window frame in Quartz space (Y-down) as returned by CGWindowListCopyWindowInfo.
+    public func screen(for quartzFrame: CGRect) -> NSScreen {
         let screens = NSScreen.screens
+        let primaryHeight = screens.first?.frame.height ?? 0
+
+        // CGWindowListCopyWindowInfo returns Quartz-space frames (Y-down, origin top-left).
+        // NSScreen.visibleFrame uses AppKit space (Y-up, origin bottom-left). Convert before intersecting.
+        let appKitFrame = CGRect(
+            x: quartzFrame.minX,
+            y: primaryHeight - quartzFrame.maxY,
+            width: quartzFrame.width,
+            height: quartzFrame.height
+        )
 
         let candidates = screens.map { screen -> (screen: NSScreen, overlap: CGFloat) in
-            let intersection = screen.visibleFrame.intersection(frame)
+            let intersection = screen.visibleFrame.intersection(appKitFrame)
             return (screen, intersection.width * intersection.height)
         }
 
@@ -126,14 +137,15 @@ public final class TilingEngine {
 
     /// Applies a tiling position to the currently focused window.
     public func applyPosition(_ position: TilingPosition) {
-        guard let focusedWindow = WindowManager.shared.focusedWindow() else {
-            NSSound.beep()
-            return
+        DispatchQueue.main.async { [self] in
+            guard let focusedWindow = WindowManager.shared.focusedWindow() else {
+                NSSound.beep()
+                return
+            }
+
+            let screen = self.screen(for: focusedWindow.frame)
+            let newFrame = frame(for: position, currentFrame: focusedWindow.frame, screen: screen)
+            WindowManager.shared.setFrame(newFrame, for: focusedWindow)
         }
-
-        let screen = self.screen(for: focusedWindow.frame)
-        let newFrame = frame(for: position, currentFrame: focusedWindow.frame, screen: screen)
-
-        WindowManager.shared.setFrame(newFrame, for: focusedWindow)
     }
 }

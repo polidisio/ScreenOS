@@ -8,6 +8,7 @@ public final class ShowDesktopManager {
 
     private var isShowingDesktop = false
     private var savedWindows: [ScreenWindow] = []
+    private var savedAxWindows: [AXUIElement] = []
 
     private init() {}
 
@@ -23,41 +24,45 @@ public final class ShowDesktopManager {
 
     private func hideAllWindows() {
         savedWindows = []
+        savedAxWindows = []
+        var seenPIDs = Set<pid_t>()
         let windows = WindowManager.shared.listAllWindows()
 
         for window in windows {
             let app = NSRunningApplication(processIdentifier: window.pid)
             if app?.bundleIdentifier == "com.apple.finder" { continue }
+            guard !seenPIDs.contains(window.pid) else { continue }
+            seenPIDs.insert(window.pid)
 
             let appElement = AXUIElementCreateApplication(window.pid)
             var windowsValue: CFTypeRef?
-            let result = AXUIElementCopyAttributeValue(appElement, kAXWindowsAttribute as CFString, &windowsValue)
-
-            guard result == .success,
-                  let axWindows = windowsValue as? [AXUIElement],
-                  let firstWindow = axWindows.first
+            guard AXUIElementCopyAttributeValue(appElement, kAXWindowsAttribute as CFString, &windowsValue) == .success,
+                  let axWindows = windowsValue as? [AXUIElement]
             else { continue }
 
-            var minimizedValue: CFTypeRef?
-            AXUIElementCopyAttributeValue(firstWindow, kAXMinimizedAttribute as CFString, &minimizedValue)
-            let isMinimized = (minimizedValue as? Bool) ?? false
+            for axWin in axWindows {
+                var minimizedValue: CFTypeRef?
+                AXUIElementCopyAttributeValue(axWin, kAXMinimizedAttribute as CFString, &minimizedValue)
+                let isMinimized = (minimizedValue as? Bool) ?? false
 
-            if !isMinimized {
-                // Save before minimizing so we can restore later
-                savedWindows.append(window)
-                AXUIElementSetAttributeValue(firstWindow, kAXMinimizedAttribute as CFString, true as CFTypeRef)
+                if !isMinimized {
+                    savedAxWindows.append(axWin)
+                    AXUIElementSetAttributeValue(axWin, kAXMinimizedAttribute as CFString, true as CFTypeRef)
+                }
             }
         }
 
+        savedWindows = windows
         isShowingDesktop = true
     }
 
     private func restoreWindows() {
-        for window in savedWindows {
-            guard let axElement = window.axElement else { continue }
-            AXUIElementSetAttributeValue(axElement, kAXMinimizedAttribute as CFString, false as CFTypeRef)
+        // Restore using window-level AX elements, not app-level elements.
+        for axWin in savedAxWindows {
+            AXUIElementSetAttributeValue(axWin, kAXMinimizedAttribute as CFString, false as CFTypeRef)
         }
         savedWindows = []
+        savedAxWindows = []
         isShowingDesktop = false
     }
 }
