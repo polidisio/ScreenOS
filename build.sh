@@ -11,6 +11,9 @@ echo "🔨 Building $APP_NAME..."
 
 cd "$PROJECT_DIR"
 
+# Remove stale Xcode-built app to avoid running wrong version
+rm -rf "$PROJECT_DIR/build/Release/$APP_NAME.app" 2>/dev/null || true
+
 # Build with SwiftPM
 swift build -c release
 
@@ -57,8 +60,13 @@ echo ""
 echo "✅ $APP_NAME.app created at:"
 echo "   $APP_BUNDLE"
 echo ""
-echo "🚀 Para abrirlo: open \"$APP_BUNDLE\""
+
+# Kill any running instance (Xcode or previous SwiftPM build) before opening
+pkill -x "$APP_NAME" 2>/dev/null || true
+sleep 0.4
+
+echo "🚀 Abriendo $APP_NAME..."
+open "$APP_BUNDLE"
 echo ""
-echo "⚠️  IMPORTANTE: La primera vez necesitarás conceder permisos:"
-echo "   1. Privacidad → Accesibilidad → Añadir ScreenOS"
-echo "   2. Privacidad → Grabación de Pantalla → Añadir ScreenOS (para el Switcher)"
+echo "⚠️  Si es la primera vez, concede el permiso de Accesibilidad cuando te lo pida."
+echo "   La app se reiniciará automáticamente tras concederlo."

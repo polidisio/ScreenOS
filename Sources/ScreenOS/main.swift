@@ -62,6 +62,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func updateMenu() {
         let menu = NSMenu()
 
+        // Permission warning — shown when Accessibility is not granted
+        if !PermissionsManager.shared.hasAccessibilityPermission {
+            let warn = menu.addItem(withTitle: "⚠️ Accessibility: conceder permiso",
+                                    action: #selector(openAccessibility), keyEquivalent: "")
+            warn.target = self
+            menu.addItem(.separator())
+        }
+
         // Show Desktop — label flips to "Show Windows" when desktop is visible
         let sdTitle = ShowDesktopManager.shared.isActive ? "Show Windows" : "Show Desktop"
         let showItem = menu.addItem(withTitle: sdTitle, action: #selector(toggleShowDesktop), keyEquivalent: "")
@@ -122,14 +130,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         let alert = NSAlert()
         alert.messageText = "Accessibility Permission Required"
-        alert.informativeText = "ScreenOS needs Accessibility permission to move and resize windows.\n\nGo to: System Settings → Privacy & Security → Accessibility → Add ScreenOS"
+        alert.informativeText = "ScreenOS needs Accessibility permission to move and resize windows.\n\nGo to: System Settings → Privacy & Security → Accessibility → Add ScreenOS\n\nAfter granting permission, ScreenOS will restart automatically."
         alert.alertStyle = .informational
         alert.addButton(withTitle: "Open System Settings")
         alert.addButton(withTitle: "Later")
 
         if alert.runModal() == .alertFirstButtonReturn {
             PermissionsManager.shared.requestAccessibilityPermission()
+        } else {
+            // Start polling even if user clicked Later — in case they grant it manually
+            PermissionsManager.shared.startPollingForAccessibility()
         }
+    }
+
+    @objc private func openAccessibility() {
+        PermissionsManager.shared.requestAccessibilityPermission()
     }
 
     // MARK: - Actions

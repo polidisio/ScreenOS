@@ -138,6 +138,10 @@ public final class TilingEngine {
     /// Applies a tiling position to the currently focused window.
     public func applyPosition(_ position: TilingPosition) {
         DispatchQueue.main.async { [self] in
+            guard AXIsProcessTrusted() else {
+                PermissionsManager.shared.requestAccessibilityPermission()
+                return
+            }
             guard let focusedWindow = WindowManager.shared.focusedWindow() else {
                 NSSound.beep()
                 return

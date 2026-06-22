@@ -19,6 +19,32 @@ public final class PermissionsManager {
         let options = [kAXTrustedCheckOptionPrompt.takeRetainedValue(): true] as CFDictionary
         AXIsProcessTrustedWithOptions(options)
         openPrivacyPane(.accessibility)
+        startPollingForAccessibility()
+    }
+
+    // Polls every second until Accessibility is granted, then relaunches.
+    // macOS requires a full process restart for AXIsProcessTrusted() to flip.
+    public func startPollingForAccessibility() {
+        guard !hasAccessibilityPermission else { return }
+        let timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] t in
+            guard AXIsProcessTrusted() else { return }
+            t.invalidate()
+            self?.relaunchForAccessibility()
+        }
+        RunLoop.main.add(timer, forMode: .common)
+    }
+
+    private func relaunchForAccessibility() {
+        let alert = NSAlert()
+        alert.messageText = "Permiso concedido"
+        alert.informativeText = "ScreenOS debe reiniciarse para activar el control de ventanas."
+        alert.alertStyle = .informational
+        alert.addButton(withTitle: "Reiniciar ahora")
+        alert.runModal()
+        let url = Bundle.main.bundleURL
+        let config = NSWorkspace.OpenConfiguration()
+        NSWorkspace.shared.openApplication(at: url, configuration: config) { _, _ in }
+        NSApp.terminate(nil)
     }
 
     // MARK: - Screen Recording
